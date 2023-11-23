@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d4ede16572d43d7b7cd925cde6bf088" Name="Diagram1" ZoomLevel="31">
+        <EntityTypeShape EntityType="MartinaPASModel.Autos" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Bienes" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Cajas" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Clientes" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Cuotas" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Endosos" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Movimientos_Caja" Width="1.5" PointX="10.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Polizas" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Privilegios" Width="1.5" PointX="8.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Recibos" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Rol_Privilegio" Width="1.5" PointX="11" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Roles" Width="1.5" PointX="8.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.TipoMovCaja" Width="1.5" PointX="8" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Usuario_Rol" Width="1.5" PointX="11" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinaPASModel.Usuarios" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="MartinaPASModel.FK_Bienes_Autos" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Endosos_Bienes" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK__Movimient__Id_Ca__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Cajas_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Polizas_Clientes" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Cuotas_Endosos" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Recibos_Cuotas" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Endosos_Polizas" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK_Movimientos_Caja_TipoMovCaja" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK__Rol_Privi__Id_Pr__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK__Rol_Privi__Id_Ro__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK__Usuario_R__Id_Ro__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="MartinaPASModel.FK__Usuario_R__Id_Us__47DBAE45" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MartinaPASModel.Sesiones" Width="1.5" PointX="8" PointY="20.75" />
+        <AssociationConnector Association="MartinaPASModel.FK_Sesiones_Usuarios" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

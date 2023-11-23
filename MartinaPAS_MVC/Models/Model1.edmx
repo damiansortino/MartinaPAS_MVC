@@ -1,0 +1,1145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MartinaPASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dominio" Type="varchar" MaxLength="50" />
+          <Property Name="MarcaModelo" Type="varchar" MaxLength="255" />
+          <Property Name="Anio" Type="int" />
+          <Property Name="Chasis" Type="varchar" MaxLength="255" />
+          <Property Name="Motor" Type="varchar" MaxLength="255" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="Uso" Type="varchar" MaxLength="50" />
+          <Property Name="GNC" Type="char" MaxLength="1" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bienes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="Domicilio" Type="nvarchar" MaxLength="255" />
+          <Property Name="Ubicacion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="255" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="255" />
+          <Property Name="Acreedor" Type="nvarchar" MaxLength="255" />
+          <Property Name="Desde" Type="date" />
+          <Property Name="Hasta" Type="date" />
+          <Property Name="idAuto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cajas">
+          <Key>
+            <PropertyRef Name="Id_Caja" />
+          </Key>
+          <Property Name="Id_Caja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha_Apertura" Type="datetime" />
+          <Property Name="Fecha_Cierre" Type="datetime" />
+          <Property Name="Monto_Inicial" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Monto_Final" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApellidoyNombre" Type="varchar" MaxLength="100" />
+          <Property Name="DNI" Type="varchar" MaxLength="20" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="100" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="50" />
+          <Property Name="Provincia" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="CUIT/CUIL" Type="varchar" MaxLength="50" />
+          <Property Name="observaciones" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Cuotas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero" Type="int" Nullable="false" />
+          <Property Name="vencimiento" Type="date" Nullable="false" />
+          <Property Name="convenio" Type="date" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="pagada" Type="bit" Nullable="false" />
+          <Property Name="idendoso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Endosos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idpoliza" Type="int" Nullable="false" />
+          <Property Name="endoso" Type="int" Nullable="false" />
+          <Property Name="suplemento" Type="int" />
+          <Property Name="fechavigenciadesde" Type="date" />
+          <Property Name="fechavigenciahasta" Type="date" />
+          <Property Name="cantidadcuotas" Type="int" Nullable="false" />
+          <Property Name="idbien" Type="int" Nullable="false" />
+          <Property Name="asociada" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Movimientos_Caja">
+          <Key>
+            <PropertyRef Name="Id_Movimiento_Caja" />
+          </Key>
+          <Property Name="Id_Movimiento_Caja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Caja" Type="int" Nullable="false" />
+          <Property Name="Fecha_Movimiento" Type="datetime" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="Monto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="idtipomovcaja" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Polizas">
+          <Key>
+            <PropertyRef Name="IdPoliza" />
+          </Key>
+          <Property Name="IdPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="NumeroPoliza" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Rama" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Privilegios">
+          <Key>
+            <PropertyRef Name="Id_Privilegio" />
+          </Key>
+          <Property Name="Id_Privilegio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Privilegio" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Recibos">
+          <Key>
+            <PropertyRef Name="IdRecibo" />
+          </Key>
+          <Property Name="IdRecibo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCobro" Type="datetime" />
+          <Property Name="Importe" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fechaalta" Type="datetime" Nullable="false" />
+          <Property Name="fechabaja" Type="datetime" />
+          <Property Name="idcuota" Type="int" Nullable="false" />
+          <Property Name="codigobarra" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Rol_Privilegio">
+          <Key>
+            <PropertyRef Name="Id_Rol_Privilegio" />
+          </Key>
+          <Property Name="Id_Rol_Privilegio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Rol" Type="int" />
+          <Property Name="Id_Privilegio" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id_Rol" />
+          </Key>
+          <Property Name="Id_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Rol" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sesiones">
+          <Key>
+            <PropertyRef Name="Id_Sesion" />
+          </Key>
+          <Property Name="Id_Sesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Fecha_Hora_Inicio" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_Hora_Final" Type="datetime" />
+          <Property Name="Direccion_IP" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo_Dispositivo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoMovCaja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="codigo" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario_Rol">
+          <Key>
+            <PropertyRef Name="Id_Usuario_Rol" />
+          </Key>
+          <Property Name="Id_Usuario_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" />
+          <Property Name="Id_Rol" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Movimient__Id_Ca__45F365D3">
+          <End Role="Cajas" Type="Self.Cajas" Multiplicity="1" />
+          <End Role="Movimientos_Caja" Type="Self.Movimientos_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cajas">
+              <PropertyRef Name="Id_Caja" />
+            </Principal>
+            <Dependent Role="Movimientos_Caja">
+              <PropertyRef Name="Id_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rol_Privi__Id_Pr__44FF419A">
+          <End Role="Privilegios" Type="Self.Privilegios" Multiplicity="0..1" />
+          <End Role="Rol_Privilegio" Type="Self.Rol_Privilegio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privilegios">
+              <PropertyRef Name="Id_Privilegio" />
+            </Principal>
+            <Dependent Role="Rol_Privilegio">
+              <PropertyRef Name="Id_Privilegio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rol_Privi__Id_Ro__45F365D3">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Rol_Privilegio" Type="Self.Rol_Privilegio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Rol_Privilegio">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario_R__Id_Ro__46E78A0C">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario_R__Id_Us__47DBAE45">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bienes_Autos">
+          <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
+          <End Role="Bienes" Type="Self.Bienes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bienes">
+              <PropertyRef Name="idAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cajas_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Cajas" Type="Self.Cajas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Cajas">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuotas_Endosos">
+          <End Role="Endosos" Type="Self.Endosos" Multiplicity="1" />
+          <End Role="Cuotas" Type="Self.Cuotas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endosos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuotas">
+              <PropertyRef Name="idendoso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endosos_Bienes">
+          <End Role="Bienes" Type="Self.Bienes" Multiplicity="1" />
+          <End Role="Endosos" Type="Self.Endosos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bienes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Endosos">
+              <PropertyRef Name="idbien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endosos_Polizas">
+          <End Role="Polizas" Type="Self.Polizas" Multiplicity="1" />
+          <End Role="Endosos" Type="Self.Endosos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polizas">
+              <PropertyRef Name="IdPoliza" />
+            </Principal>
+            <Dependent Role="Endosos">
+              <PropertyRef Name="idpoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimientos_Caja_TipoMovCaja">
+          <End Role="TipoMovCaja" Type="Self.TipoMovCaja" Multiplicity="1" />
+          <End Role="Movimientos_Caja" Type="Self.Movimientos_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMovCaja">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos_Caja">
+              <PropertyRef Name="idtipomovcaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polizas_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Polizas" Type="Self.Polizas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Polizas">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recibos_Cuotas">
+          <End Role="Cuotas" Type="Self.Cuotas" Multiplicity="1" />
+          <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuotas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recibos">
+              <PropertyRef Name="idcuota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sesiones_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Sesiones" Type="Self.Sesiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Sesiones">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MartinaPASModelStoreContainer">
+          <EntitySet Name="Autos" EntityType="Self.Autos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bienes" EntityType="Self.Bienes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cajas" EntityType="Self.Cajas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuotas" EntityType="Self.Cuotas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Endosos" EntityType="Self.Endosos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos_Caja" EntityType="Self.Movimientos_Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polizas" EntityType="Self.Polizas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Privilegios" EntityType="Self.Privilegios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recibos" EntityType="Self.Recibos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol_Privilegio" EntityType="Self.Rol_Privilegio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sesiones" EntityType="Self.Sesiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMovCaja" EntityType="Self.TipoMovCaja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario_Rol" EntityType="Self.Usuario_Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Movimient__Id_Ca__45F365D3" Association="Self.FK__Movimient__Id_Ca__45F365D3">
+            <End Role="Cajas" EntitySet="Cajas" />
+            <End Role="Movimientos_Caja" EntitySet="Movimientos_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rol_Privi__Id_Pr__44FF419A" Association="Self.FK__Rol_Privi__Id_Pr__44FF419A">
+            <End Role="Privilegios" EntitySet="Privilegios" />
+            <End Role="Rol_Privilegio" EntitySet="Rol_Privilegio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rol_Privi__Id_Ro__45F365D3" Association="Self.FK__Rol_Privi__Id_Ro__45F365D3">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Rol_Privilegio" EntitySet="Rol_Privilegio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario_R__Id_Ro__46E78A0C" Association="Self.FK__Usuario_R__Id_Ro__46E78A0C">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario_R__Id_Us__47DBAE45" Association="Self.FK__Usuario_R__Id_Us__47DBAE45">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bienes_Autos" Association="Self.FK_Bienes_Autos">
+            <End Role="Autos" EntitySet="Autos" />
+            <End Role="Bienes" EntitySet="Bienes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cajas_Usuarios" Association="Self.FK_Cajas_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Cajas" EntitySet="Cajas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuotas_Endosos" Association="Self.FK_Cuotas_Endosos">
+            <End Role="Endosos" EntitySet="Endosos" />
+            <End Role="Cuotas" EntitySet="Cuotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endosos_Bienes" Association="Self.FK_Endosos_Bienes">
+            <End Role="Bienes" EntitySet="Bienes" />
+            <End Role="Endosos" EntitySet="Endosos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endosos_Polizas" Association="Self.FK_Endosos_Polizas">
+            <End Role="Polizas" EntitySet="Polizas" />
+            <End Role="Endosos" EntitySet="Endosos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Caja_TipoMovCaja" Association="Self.FK_Movimientos_Caja_TipoMovCaja">
+            <End Role="TipoMovCaja" EntitySet="TipoMovCaja" />
+            <End Role="Movimientos_Caja" EntitySet="Movimientos_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polizas_Clientes" Association="Self.FK_Polizas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Polizas" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recibos_Cuotas" Association="Self.FK_Recibos_Cuotas">
+            <End Role="Cuotas" EntitySet="Cuotas" />
+            <End Role="Recibos" EntitySet="Recibos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sesiones_Usuarios" Association="Self.FK_Sesiones_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Sesiones" EntitySet="Sesiones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MartinaPASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dominio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MarcaModelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="Chasis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Motor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Uso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GNC" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bienes" Relationship="Self.FK_Bienes_Autos" FromRole="Autos" ToRole="Bienes" />
+        </EntityType>
+        <EntityType Name="Bienes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Domicilio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Ubicacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Ciudad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Acreedor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Desde" Type="DateTime" Precision="0" />
+          <Property Name="Hasta" Type="DateTime" Precision="0" />
+          <Property Name="idAuto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Autos" Relationship="Self.FK_Bienes_Autos" FromRole="Bienes" ToRole="Autos" />
+          <NavigationProperty Name="Endosos" Relationship="Self.FK_Endosos_Bienes" FromRole="Bienes" ToRole="Endosos" />
+        </EntityType>
+        <EntityType Name="Cajas">
+          <Key>
+            <PropertyRef Name="Id_Caja" />
+          </Key>
+          <Property Name="Id_Caja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha_Apertura" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Cierre" Type="DateTime" Precision="3" />
+          <Property Name="Monto_Inicial" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Monto_Final" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movimientos_Caja" Relationship="Self.FK__Movimient__Id_Ca__45F365D3" FromRole="Cajas" ToRole="Movimientos_Caja" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Cajas_Usuarios" FromRole="Cajas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApellidoyNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUIT_CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Polizas" Relationship="Self.FK_Polizas_Clientes" FromRole="Clientes" ToRole="Polizas" />
+        </EntityType>
+        <EntityType Name="Cuotas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <Property Name="vencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="convenio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="pagada" Type="Boolean" Nullable="false" />
+          <Property Name="idendoso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Endosos" Relationship="Self.FK_Cuotas_Endosos" FromRole="Cuotas" ToRole="Endosos" />
+          <NavigationProperty Name="Recibos" Relationship="Self.FK_Recibos_Cuotas" FromRole="Cuotas" ToRole="Recibos" />
+        </EntityType>
+        <EntityType Name="Endosos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idpoliza" Type="Int32" Nullable="false" />
+          <Property Name="endoso" Type="Int32" Nullable="false" />
+          <Property Name="suplemento" Type="Int32" />
+          <Property Name="fechavigenciadesde" Type="DateTime" Precision="0" />
+          <Property Name="fechavigenciahasta" Type="DateTime" Precision="0" />
+          <Property Name="cantidadcuotas" Type="Int32" Nullable="false" />
+          <Property Name="idbien" Type="Int32" Nullable="false" />
+          <Property Name="asociada" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bienes" Relationship="Self.FK_Endosos_Bienes" FromRole="Endosos" ToRole="Bienes" />
+          <NavigationProperty Name="Cuotas" Relationship="Self.FK_Cuotas_Endosos" FromRole="Endosos" ToRole="Cuotas" />
+          <NavigationProperty Name="Polizas" Relationship="Self.FK_Endosos_Polizas" FromRole="Endosos" ToRole="Polizas" />
+        </EntityType>
+        <EntityType Name="Movimientos_Caja">
+          <Key>
+            <PropertyRef Name="Id_Movimiento_Caja" />
+          </Key>
+          <Property Name="Id_Movimiento_Caja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Caja" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Movimiento" Type="DateTime" Precision="3" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="idtipomovcaja" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cajas" Relationship="Self.FK__Movimient__Id_Ca__45F365D3" FromRole="Movimientos_Caja" ToRole="Cajas" />
+          <NavigationProperty Name="TipoMovCaja" Relationship="Self.FK_Movimientos_Caja_TipoMovCaja" FromRole="Movimientos_Caja" ToRole="TipoMovCaja" />
+        </EntityType>
+        <EntityType Name="Polizas">
+          <Key>
+            <PropertyRef Name="IdPoliza" />
+          </Key>
+          <Property Name="IdPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="NumeroPoliza" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Rama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_Polizas_Clientes" FromRole="Polizas" ToRole="Clientes" />
+          <NavigationProperty Name="Endosos" Relationship="Self.FK_Endosos_Polizas" FromRole="Polizas" ToRole="Endosos" />
+        </EntityType>
+        <EntityType Name="Privilegios">
+          <Key>
+            <PropertyRef Name="Id_Privilegio" />
+          </Key>
+          <Property Name="Id_Privilegio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Privilegio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rol_Privilegio" Relationship="Self.FK__Rol_Privi__Id_Pr__44FF419A" FromRole="Privilegios" ToRole="Rol_Privilegio" />
+        </EntityType>
+        <EntityType Name="Recibos">
+          <Key>
+            <PropertyRef Name="IdRecibo" />
+          </Key>
+          <Property Name="IdRecibo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCobro" Type="DateTime" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fechaalta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechabaja" Type="DateTime" Precision="3" />
+          <Property Name="idcuota" Type="Int32" Nullable="false" />
+          <Property Name="codigobarra" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cuotas" Relationship="Self.FK_Recibos_Cuotas" FromRole="Recibos" ToRole="Cuotas" />
+        </EntityType>
+        <EntityType Name="Rol_Privilegio">
+          <Key>
+            <PropertyRef Name="Id_Rol_Privilegio" />
+          </Key>
+          <Property Name="Id_Rol_Privilegio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Rol" Type="Int32" />
+          <Property Name="Id_Privilegio" Type="Int32" />
+          <NavigationProperty Name="Privilegios" Relationship="Self.FK__Rol_Privi__Id_Pr__44FF419A" FromRole="Rol_Privilegio" ToRole="Privilegios" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Rol_Privi__Id_Ro__45F365D3" FromRole="Rol_Privilegio" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id_Rol" />
+          </Key>
+          <Property Name="Id_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rol_Privilegio" Relationship="Self.FK__Rol_Privi__Id_Ro__45F365D3" FromRole="Roles" ToRole="Rol_Privilegio" />
+          <NavigationProperty Name="Usuario_Rol" Relationship="Self.FK__Usuario_R__Id_Ro__46E78A0C" FromRole="Roles" ToRole="Usuario_Rol" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoMovCaja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="Int32" />
+          <NavigationProperty Name="Movimientos_Caja" Relationship="Self.FK_Movimientos_Caja_TipoMovCaja" FromRole="TipoMovCaja" ToRole="Movimientos_Caja" />
+        </EntityType>
+        <EntityType Name="Usuario_Rol">
+          <Key>
+            <PropertyRef Name="Id_Usuario_Rol" />
+          </Key>
+          <Property Name="Id_Usuario_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Usuario" Type="Int32" />
+          <Property Name="Id_Rol" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuario_R__Id_Ro__46E78A0C" FromRole="Usuario_Rol" ToRole="Roles" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuario_R__Id_Us__47DBAE45" FromRole="Usuario_Rol" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cajas" Relationship="Self.FK_Cajas_Usuarios" FromRole="Usuarios" ToRole="Cajas" />
+          <NavigationProperty Name="Usuario_Rol" Relationship="Self.FK__Usuario_R__Id_Us__47DBAE45" FromRole="Usuarios" ToRole="Usuario_Rol" />
+          <NavigationProperty Name="Sesiones" Relationship="MartinaPASModel.FK_Sesiones_Usuarios" FromRole="Usuarios" ToRole="Sesiones" />
+        </EntityType>
+        <Association Name="FK_Bienes_Autos">
+          <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
+          <End Role="Bienes" Type="Self.Bienes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bienes">
+              <PropertyRef Name="idAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endosos_Bienes">
+          <End Role="Bienes" Type="Self.Bienes" Multiplicity="1" />
+          <End Role="Endosos" Type="Self.Endosos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bienes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Endosos">
+              <PropertyRef Name="idbien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__Id_Ca__45F365D3">
+          <End Role="Cajas" Type="Self.Cajas" Multiplicity="1" />
+          <End Role="Movimientos_Caja" Type="Self.Movimientos_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cajas">
+              <PropertyRef Name="Id_Caja" />
+            </Principal>
+            <Dependent Role="Movimientos_Caja">
+              <PropertyRef Name="Id_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cajas_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Cajas" Type="Self.Cajas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Cajas">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polizas_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Polizas" Type="Self.Polizas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Polizas">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuotas_Endosos">
+          <End Role="Endosos" Type="Self.Endosos" Multiplicity="1" />
+          <End Role="Cuotas" Type="Self.Cuotas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endosos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuotas">
+              <PropertyRef Name="idendoso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recibos_Cuotas">
+          <End Role="Cuotas" Type="Self.Cuotas" Multiplicity="1" />
+          <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuotas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recibos">
+              <PropertyRef Name="idcuota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endosos_Polizas">
+          <End Role="Polizas" Type="Self.Polizas" Multiplicity="1" />
+          <End Role="Endosos" Type="Self.Endosos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polizas">
+              <PropertyRef Name="IdPoliza" />
+            </Principal>
+            <Dependent Role="Endosos">
+              <PropertyRef Name="idpoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimientos_Caja_TipoMovCaja">
+          <End Role="TipoMovCaja" Type="Self.TipoMovCaja" Multiplicity="1" />
+          <End Role="Movimientos_Caja" Type="Self.Movimientos_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMovCaja">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos_Caja">
+              <PropertyRef Name="idtipomovcaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rol_Privi__Id_Pr__44FF419A">
+          <End Role="Privilegios" Type="Self.Privilegios" Multiplicity="0..1" />
+          <End Role="Rol_Privilegio" Type="Self.Rol_Privilegio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privilegios">
+              <PropertyRef Name="Id_Privilegio" />
+            </Principal>
+            <Dependent Role="Rol_Privilegio">
+              <PropertyRef Name="Id_Privilegio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rol_Privi__Id_Ro__45F365D3">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Rol_Privilegio" Type="Self.Rol_Privilegio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Rol_Privilegio">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario_R__Id_Ro__46E78A0C">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario_R__Id_Us__47DBAE45">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MartinaPASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autos" EntityType="Self.Autos" />
+          <EntitySet Name="Bienes" EntityType="Self.Bienes" />
+          <EntitySet Name="Cajas" EntityType="Self.Cajas" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Cuotas" EntityType="Self.Cuotas" />
+          <EntitySet Name="Endosos" EntityType="Self.Endosos" />
+          <EntitySet Name="Movimientos_Caja" EntityType="Self.Movimientos_Caja" />
+          <EntitySet Name="Polizas" EntityType="Self.Polizas" />
+          <EntitySet Name="Privilegios" EntityType="Self.Privilegios" />
+          <EntitySet Name="Recibos" EntityType="Self.Recibos" />
+          <EntitySet Name="Rol_Privilegio" EntityType="Self.Rol_Privilegio" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoMovCaja" EntityType="Self.TipoMovCaja" />
+          <EntitySet Name="Usuario_Rol" EntityType="Self.Usuario_Rol" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_Bienes_Autos" Association="Self.FK_Bienes_Autos">
+            <End Role="Autos" EntitySet="Autos" />
+            <End Role="Bienes" EntitySet="Bienes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endosos_Bienes" Association="Self.FK_Endosos_Bienes">
+            <End Role="Bienes" EntitySet="Bienes" />
+            <End Role="Endosos" EntitySet="Endosos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__Id_Ca__45F365D3" Association="Self.FK__Movimient__Id_Ca__45F365D3">
+            <End Role="Cajas" EntitySet="Cajas" />
+            <End Role="Movimientos_Caja" EntitySet="Movimientos_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cajas_Usuarios" Association="Self.FK_Cajas_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Cajas" EntitySet="Cajas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polizas_Clientes" Association="Self.FK_Polizas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Polizas" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuotas_Endosos" Association="Self.FK_Cuotas_Endosos">
+            <End Role="Endosos" EntitySet="Endosos" />
+            <End Role="Cuotas" EntitySet="Cuotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recibos_Cuotas" Association="Self.FK_Recibos_Cuotas">
+            <End Role="Cuotas" EntitySet="Cuotas" />
+            <End Role="Recibos" EntitySet="Recibos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endosos_Polizas" Association="Self.FK_Endosos_Polizas">
+            <End Role="Polizas" EntitySet="Polizas" />
+            <End Role="Endosos" EntitySet="Endosos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Caja_TipoMovCaja" Association="Self.FK_Movimientos_Caja_TipoMovCaja">
+            <End Role="TipoMovCaja" EntitySet="TipoMovCaja" />
+            <End Role="Movimientos_Caja" EntitySet="Movimientos_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rol_Privi__Id_Pr__44FF419A" Association="Self.FK__Rol_Privi__Id_Pr__44FF419A">
+            <End Role="Privilegios" EntitySet="Privilegios" />
+            <End Role="Rol_Privilegio" EntitySet="Rol_Privilegio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rol_Privi__Id_Ro__45F365D3" Association="Self.FK__Rol_Privi__Id_Ro__45F365D3">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Rol_Privilegio" EntitySet="Rol_Privilegio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario_R__Id_Ro__46E78A0C" Association="Self.FK__Usuario_R__Id_Ro__46E78A0C">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario_R__Id_Us__47DBAE45" Association="Self.FK__Usuario_R__Id_Us__47DBAE45">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <EntitySet Name="Sesiones" EntityType="MartinaPASModel.Sesiones" />
+          <AssociationSet Name="FK_Sesiones_Usuarios" Association="MartinaPASModel.FK_Sesiones_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Sesiones" EntitySet="Sesiones" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Sesiones">
+          <Key>
+            <PropertyRef Name="Id_Sesion" />
+          </Key>
+          <Property Name="Id_Sesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Hora_Inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Hora_Final" Type="DateTime" Precision="3" />
+          <Property Name="Direccion_IP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_Dispositivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="MartinaPASModel.FK_Sesiones_Usuarios" FromRole="Sesiones" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Sesiones_Usuarios">
+          <End Type="MartinaPASModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="MartinaPASModel.Sesiones" Role="Sesiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Sesiones">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MartinaPASModelStoreContainer" CdmEntityContainer="MartinaPASEntities">
+          <EntitySetMapping Name="Autos">
+            <EntityTypeMapping TypeName="MartinaPASModel.Autos">
+              <MappingFragment StoreEntitySet="Autos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+                <ScalarProperty Name="MarcaModelo" ColumnName="MarcaModelo" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Chasis" ColumnName="Chasis" />
+                <ScalarProperty Name="Motor" ColumnName="Motor" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Uso" ColumnName="Uso" />
+                <ScalarProperty Name="GNC" ColumnName="GNC" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bienes">
+            <EntityTypeMapping TypeName="MartinaPASModel.Bienes">
+              <MappingFragment StoreEntitySet="Bienes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Acreedor" ColumnName="Acreedor" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="idAuto" ColumnName="idAuto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cajas">
+            <EntityTypeMapping TypeName="MartinaPASModel.Cajas">
+              <MappingFragment StoreEntitySet="Cajas">
+                <ScalarProperty Name="Id_Caja" ColumnName="Id_Caja" />
+                <ScalarProperty Name="Fecha_Apertura" ColumnName="Fecha_Apertura" />
+                <ScalarProperty Name="Fecha_Cierre" ColumnName="Fecha_Cierre" />
+                <ScalarProperty Name="Monto_Inicial" ColumnName="Monto_Inicial" />
+                <ScalarProperty Name="Monto_Final" ColumnName="Monto_Final" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="MartinaPASModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="ApellidoyNombre" ColumnName="ApellidoyNombre" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="CUIT_CUIL" ColumnName="CUIT/CUIL" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuotas">
+            <EntityTypeMapping TypeName="MartinaPASModel.Cuotas">
+              <MappingFragment StoreEntitySet="Cuotas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="vencimiento" ColumnName="vencimiento" />
+                <ScalarProperty Name="convenio" ColumnName="convenio" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="pagada" ColumnName="pagada" />
+                <ScalarProperty Name="idendoso" ColumnName="idendoso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Endosos">
+            <EntityTypeMapping TypeName="MartinaPASModel.Endosos">
+              <MappingFragment StoreEntitySet="Endosos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idpoliza" ColumnName="idpoliza" />
+                <ScalarProperty Name="endoso" ColumnName="endoso" />
+                <ScalarProperty Name="suplemento" ColumnName="suplemento" />
+                <ScalarProperty Name="fechavigenciadesde" ColumnName="fechavigenciadesde" />
+                <ScalarProperty Name="fechavigenciahasta" ColumnName="fechavigenciahasta" />
+                <ScalarProperty Name="cantidadcuotas" ColumnName="cantidadcuotas" />
+                <ScalarProperty Name="idbien" ColumnName="idbien" />
+                <ScalarProperty Name="asociada" ColumnName="asociada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos_Caja">
+            <EntityTypeMapping TypeName="MartinaPASModel.Movimientos_Caja">
+              <MappingFragment StoreEntitySet="Movimientos_Caja">
+                <ScalarProperty Name="Id_Movimiento_Caja" ColumnName="Id_Movimiento_Caja" />
+                <ScalarProperty Name="Id_Caja" ColumnName="Id_Caja" />
+                <ScalarProperty Name="Fecha_Movimiento" ColumnName="Fecha_Movimiento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="idtipomovcaja" ColumnName="idtipomovcaja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polizas">
+            <EntityTypeMapping TypeName="MartinaPASModel.Polizas">
+              <MappingFragment StoreEntitySet="Polizas">
+                <ScalarProperty Name="IdPoliza" ColumnName="IdPoliza" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NumeroPoliza" ColumnName="NumeroPoliza" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Rama" ColumnName="Rama" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Privilegios">
+            <EntityTypeMapping TypeName="MartinaPASModel.Privilegios">
+              <MappingFragment StoreEntitySet="Privilegios">
+                <ScalarProperty Name="Id_Privilegio" ColumnName="Id_Privilegio" />
+                <ScalarProperty Name="Nombre_Privilegio" ColumnName="Nombre_Privilegio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recibos">
+            <EntityTypeMapping TypeName="MartinaPASModel.Recibos">
+              <MappingFragment StoreEntitySet="Recibos">
+                <ScalarProperty Name="IdRecibo" ColumnName="IdRecibo" />
+                <ScalarProperty Name="FechaCobro" ColumnName="FechaCobro" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="fechaalta" ColumnName="fechaalta" />
+                <ScalarProperty Name="fechabaja" ColumnName="fechabaja" />
+                <ScalarProperty Name="idcuota" ColumnName="idcuota" />
+                <ScalarProperty Name="codigobarra" ColumnName="codigobarra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol_Privilegio">
+            <EntityTypeMapping TypeName="MartinaPASModel.Rol_Privilegio">
+              <MappingFragment StoreEntitySet="Rol_Privilegio">
+                <ScalarProperty Name="Id_Rol_Privilegio" ColumnName="Id_Rol_Privilegio" />
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+                <ScalarProperty Name="Id_Privilegio" ColumnName="Id_Privilegio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MartinaPASModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MartinaPASModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoMovCaja">
+            <EntityTypeMapping TypeName="MartinaPASModel.TipoMovCaja">
+              <MappingFragment StoreEntitySet="TipoMovCaja">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario_Rol">
+            <EntityTypeMapping TypeName="MartinaPASModel.Usuario_Rol">
+              <MappingFragment StoreEntitySet="Usuario_Rol">
+                <ScalarProperty Name="Id_Usuario_Rol" ColumnName="Id_Usuario_Rol" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="MartinaPASModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sesiones">
+            <EntityTypeMapping TypeName="MartinaPASModel.Sesiones">
+              <MappingFragment StoreEntitySet="Sesiones">
+                <ScalarProperty Name="Tipo_Dispositivo" ColumnName="Tipo_Dispositivo" />
+                <ScalarProperty Name="Direccion_IP" ColumnName="Direccion_IP" />
+                <ScalarProperty Name="Fecha_Hora_Final" ColumnName="Fecha_Hora_Final" />
+                <ScalarProperty Name="Fecha_Hora_Inicio" ColumnName="Fecha_Hora_Inicio" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id_Sesion" ColumnName="Id_Sesion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
