@@ -18,8 +18,8 @@ namespace MartinaPAS_MVC.Models
         public Usuarios()
         {
             this.Cajas = new HashSet<Cajas>();
-            this.Usuario_Rol = new HashSet<Usuario_Rol>();
             this.Sesiones = new HashSet<Sesiones>();
+            this.Usuario_Rol = new HashSet<Usuario_Rol>();
         }
     
         public int Id_Usuario { get; set; }
@@ -33,8 +33,8 @@ namespace MartinaPAS_MVC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cajas> Cajas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sesiones> Sesiones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }
     }
 }

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MartinaPASModelStoreContainer" CdmEntityContainer="MartinaPASEntities">
+    <EntitySetMapping Name="Autos">
+      <EntityTypeMapping TypeName="MartinaPASModel.Autos">
+        <MappingFragment StoreEntitySet="Autos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+          <ScalarProperty Name="MarcaModelo" ColumnName="MarcaModelo" />
+          <ScalarProperty Name="Anio" ColumnName="Anio" />
+          <ScalarProperty Name="Chasis" ColumnName="Chasis" />
+          <ScalarProperty Name="Motor" ColumnName="Motor" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Uso" ColumnName="Uso" />
+          <ScalarProperty Name="GNC" ColumnName="GNC" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bienes">
+      <EntityTypeMapping TypeName="MartinaPASModel.Bienes">
+        <MappingFragment StoreEntitySet="Bienes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+          <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Acreedor" ColumnName="Acreedor" />
+          <ScalarProperty Name="Desde" ColumnName="Desde" />
+          <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+          <ScalarProperty Name="idAuto" ColumnName="idAuto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cajas">
+      <EntityTypeMapping TypeName="MartinaPASModel.Cajas">
+        <MappingFragment StoreEntitySet="Cajas">
+          <ScalarProperty Name="Id_Caja" ColumnName="Id_Caja" />
+          <ScalarProperty Name="Fecha_Apertura" ColumnName="Fecha_Apertura" />
+          <ScalarProperty Name="Fecha_Cierre" ColumnName="Fecha_Cierre" />
+          <ScalarProperty Name="Monto_Inicial" ColumnName="Monto_Inicial" />
+          <ScalarProperty Name="Monto_Final" ColumnName="Monto_Final" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="MartinaPASModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="ApellidoyNombre" ColumnName="ApellidoyNombre" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="CUIT_CUIL" ColumnName="CUIT/CUIL" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cuotas">
+      <EntityTypeMapping TypeName="MartinaPASModel.Cuotas">
+        <MappingFragment StoreEntitySet="Cuotas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="vencimiento" ColumnName="vencimiento" />
+          <ScalarProperty Name="convenio" ColumnName="convenio" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="pagada" ColumnName="pagada" />
+          <ScalarProperty Name="idendoso" ColumnName="idendoso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Endosos">
+      <EntityTypeMapping TypeName="MartinaPASModel.Endosos">
+        <MappingFragment StoreEntitySet="Endosos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idpoliza" ColumnName="idpoliza" />
+          <ScalarProperty Name="endoso" ColumnName="endoso" />
+          <ScalarProperty Name="suplemento" ColumnName="suplemento" />
+          <ScalarProperty Name="fechavigenciadesde" ColumnName="fechavigenciadesde" />
+          <ScalarProperty Name="fechavigenciahasta" ColumnName="fechavigenciahasta" />
+          <ScalarProperty Name="cantidadcuotas" ColumnName="cantidadcuotas" />
+          <ScalarProperty Name="idbien" ColumnName="idbien" />
+          <ScalarProperty Name="asociada" ColumnName="asociada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movimientos_Caja">
+      <EntityTypeMapping TypeName="MartinaPASModel.Movimientos_Caja">
+        <MappingFragment StoreEntitySet="Movimientos_Caja">
+          <ScalarProperty Name="Id_Movimiento_Caja" ColumnName="Id_Movimiento_Caja" />
+          <ScalarProperty Name="Id_Caja" ColumnName="Id_Caja" />
+          <ScalarProperty Name="Fecha_Movimiento" ColumnName="Fecha_Movimiento" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="idtipomovcaja" ColumnName="idtipomovcaja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Polizas">
+      <EntityTypeMapping TypeName="MartinaPASModel.Polizas">
+        <MappingFragment StoreEntitySet="Polizas">
+          <ScalarProperty Name="IdPoliza" ColumnName="IdPoliza" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="NumeroPoliza" ColumnName="NumeroPoliza" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="Rama" ColumnName="Rama" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privilegios">
+      <EntityTypeMapping TypeName="MartinaPASModel.Privilegios">
+        <MappingFragment StoreEntitySet="Privilegios">
+          <ScalarProperty Name="Id_Privilegio" ColumnName="Id_Privilegio" />
+          <ScalarProperty Name="Nombre_Privilegio" ColumnName="Nombre_Privilegio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recibos">
+      <EntityTypeMapping TypeName="MartinaPASModel.Recibos">
+        <MappingFragment StoreEntitySet="Recibos">
+          <ScalarProperty Name="IdRecibo" ColumnName="IdRecibo" />
+          <ScalarProperty Name="FechaCobro" ColumnName="FechaCobro" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="fechaalta" ColumnName="fechaalta" />
+          <ScalarProperty Name="fechabaja" ColumnName="fechabaja" />
+          <ScalarProperty Name="idcuota" ColumnName="idcuota" />
+          <ScalarProperty Name="codigobarra" ColumnName="codigobarra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol_Privilegio">
+      <EntityTypeMapping TypeName="MartinaPASModel.Rol_Privilegio">
+        <MappingFragment StoreEntitySet="Rol_Privilegio">
+          <ScalarProperty Name="Id_Rol_Privilegio" ColumnName="Id_Rol_Privilegio" />
+          <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+          <ScalarProperty Name="Id_Privilegio" ColumnName="Id_Privilegio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="MartinaPASModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+          <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MartinaPASModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoMovCaja">
+      <EntityTypeMapping TypeName="MartinaPASModel.TipoMovCaja">
+        <MappingFragment StoreEntitySet="TipoMovCaja">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario_Rol">
+      <EntityTypeMapping TypeName="MartinaPASModel.Usuario_Rol">
+        <MappingFragment StoreEntitySet="Usuario_Rol">
+          <ScalarProperty Name="Id_Usuario_Rol" ColumnName="Id_Usuario_Rol" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sesiones">
+      <EntityTypeMapping TypeName="MartinaPASModel.Sesiones">
+        <MappingFragment StoreEntitySet="Sesiones">
+          <ScalarProperty Name="Tipo_Dispositivo" ColumnName="Tipo_Dispositivo" />
+          <ScalarProperty Name="Direccion_IP" ColumnName="Direccion_IP" />
+          <ScalarProperty Name="Fecha_Hora_Final" ColumnName="Fecha_Hora_Final" />
+          <ScalarProperty Name="Fecha_Hora_Inicio" ColumnName="Fecha_Hora_Inicio" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Sesion" ColumnName="Id_Sesion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="MartinaPASModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

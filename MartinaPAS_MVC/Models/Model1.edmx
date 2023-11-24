@@ -192,7 +192,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Apellido" Type="varchar" MaxLength="50" />
           <Property Name="Username" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar(max)" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -489,7 +489,7 @@
           <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idusuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Movimientos_Caja" Relationship="Self.FK__Movimient__Id_Ca__45F365D3" FromRole="Cajas" ToRole="Movimientos_Caja" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Cajas_Usuarios" FromRole="Cajas" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="MartinaPASModel.FK_Cajas_Usuarios" FromRole="Cajas" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Clientes">
           <Key>
@@ -633,22 +633,7 @@
           <Property Name="Id_Usuario" Type="Int32" />
           <Property Name="Id_Rol" Type="Int32" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Usuario_R__Id_Ro__46E78A0C" FromRole="Usuario_Rol" ToRole="Roles" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuario_R__Id_Us__47DBAE45" FromRole="Usuario_Rol" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="Id_Usuario" />
-          </Key>
-          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cajas" Relationship="Self.FK_Cajas_Usuarios" FromRole="Usuarios" ToRole="Cajas" />
-          <NavigationProperty Name="Usuario_Rol" Relationship="Self.FK__Usuario_R__Id_Us__47DBAE45" FromRole="Usuarios" ToRole="Usuario_Rol" />
-          <NavigationProperty Name="Sesiones" Relationship="MartinaPASModel.FK_Sesiones_Usuarios" FromRole="Usuarios" ToRole="Sesiones" />
+          <NavigationProperty Name="Usuarios" Relationship="MartinaPASModel.FK__Usuario_R__Id_Us__47DBAE45" FromRole="Usuario_Rol" ToRole="Usuarios" />
         </EntityType>
         <Association Name="FK_Bienes_Autos">
           <End Role="Autos" Type="Self.Autos" Multiplicity="1" />
@@ -683,18 +668,6 @@
             </Principal>
             <Dependent Role="Movimientos_Caja">
               <PropertyRef Name="Id_Caja" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cajas_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="Cajas" Type="Self.Cajas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Id_Usuario" />
-            </Principal>
-            <Dependent Role="Cajas">
-              <PropertyRef Name="idusuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -794,18 +767,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario_R__Id_Us__47DBAE45">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Id_Usuario" />
-            </Principal>
-            <Dependent Role="Usuario_Rol">
-              <PropertyRef Name="Id_Usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="MartinaPASEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Autos" EntityType="Self.Autos" />
           <EntitySet Name="Bienes" EntityType="Self.Bienes" />
@@ -822,7 +783,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TipoMovCaja" EntityType="Self.TipoMovCaja" />
           <EntitySet Name="Usuario_Rol" EntityType="Self.Usuario_Rol" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
           <AssociationSet Name="FK_Bienes_Autos" Association="Self.FK_Bienes_Autos">
             <End Role="Autos" EntitySet="Autos" />
             <End Role="Bienes" EntitySet="Bienes" />
@@ -834,10 +794,6 @@
           <AssociationSet Name="FK__Movimient__Id_Ca__45F365D3" Association="Self.FK__Movimient__Id_Ca__45F365D3">
             <End Role="Cajas" EntitySet="Cajas" />
             <End Role="Movimientos_Caja" EntitySet="Movimientos_Caja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cajas_Usuarios" Association="Self.FK_Cajas_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Cajas" EntitySet="Cajas" />
           </AssociationSet>
           <AssociationSet Name="FK_Polizas_Clientes" Association="Self.FK_Polizas_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
@@ -871,14 +827,19 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario_R__Id_Us__47DBAE45" Association="Self.FK__Usuario_R__Id_Us__47DBAE45">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
-          </AssociationSet>
           <EntitySet Name="Sesiones" EntityType="MartinaPASModel.Sesiones" />
+          <EntitySet Name="Usuarios" EntityType="MartinaPASModel.Usuarios" />
+          <AssociationSet Name="FK_Cajas_Usuarios" Association="MartinaPASModel.FK_Cajas_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Cajas" EntitySet="Cajas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sesiones_Usuarios" Association="MartinaPASModel.FK_Sesiones_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Sesiones" EntitySet="Sesiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario_R__Id_Us__47DBAE45" Association="MartinaPASModel.FK__Usuario_R__Id_Us__47DBAE45">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Sesiones">
@@ -893,6 +854,33 @@
           <Property Name="Tipo_Dispositivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuarios" Relationship="MartinaPASModel.FK_Sesiones_Usuarios" FromRole="Sesiones" ToRole="Usuarios" />
         </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cajas" Relationship="MartinaPASModel.FK_Cajas_Usuarios" FromRole="Usuarios" ToRole="Cajas" />
+          <NavigationProperty Name="Sesiones" Relationship="MartinaPASModel.FK_Sesiones_Usuarios" FromRole="Usuarios" ToRole="Sesiones" />
+          <NavigationProperty Name="Usuario_Rol" Relationship="MartinaPASModel.FK__Usuario_R__Id_Us__47DBAE45" FromRole="Usuarios" ToRole="Usuario_Rol" />
+        </EntityType>
+        <Association Name="FK_Cajas_Usuarios">
+          <End Type="MartinaPASModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="MartinaPASModel.Cajas" Role="Cajas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Cajas">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sesiones_Usuarios">
           <End Type="MartinaPASModel.Usuarios" Role="Usuarios" Multiplicity="1" />
           <End Type="MartinaPASModel.Sesiones" Role="Sesiones" Multiplicity="*" />
@@ -901,6 +889,18 @@
               <PropertyRef Name="Id_Usuario" />
             </Principal>
             <Dependent Role="Sesiones">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario_R__Id_Us__47DBAE45">
+          <End Type="MartinaPASModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+          <End Type="MartinaPASModel.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
               <PropertyRef Name="Id_Usuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -1094,19 +1094,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="MartinaPASModel.Usuarios">
-              <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sesiones">
             <EntityTypeMapping TypeName="MartinaPASModel.Sesiones">
               <MappingFragment StoreEntitySet="Sesiones">
@@ -1116,6 +1103,19 @@
                 <ScalarProperty Name="Fecha_Hora_Inicio" ColumnName="Fecha_Hora_Inicio" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Sesion" ColumnName="Id_Sesion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="MartinaPASModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

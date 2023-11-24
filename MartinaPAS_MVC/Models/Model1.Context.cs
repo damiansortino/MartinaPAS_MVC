@@ -40,7 +40,7 @@ namespace MartinaPAS_MVC.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoMovCaja> TipoMovCaja { get; set; }
         public virtual DbSet<Usuario_Rol> Usuario_Rol { get; set; }
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Sesiones> Sesiones { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
 }

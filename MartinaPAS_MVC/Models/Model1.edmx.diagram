@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4d4ede16572d43d7b7cd925cde6bf088" Name="Diagram1" ZoomLevel="31">
+      <Diagram DiagramId="4d4ede16572d43d7b7cd925cde6bf088" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="MartinaPASModel.Autos" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MartinaPASModel.Bienes" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="MartinaPASModel.Cajas" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
@@ -20,11 +20,9 @@
         <EntityTypeShape EntityType="MartinaPASModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MartinaPASModel.TipoMovCaja" Width="1.5" PointX="8" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="MartinaPASModel.Usuario_Rol" Width="1.5" PointX="11" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MartinaPASModel.Usuarios" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
         <AssociationConnector Association="MartinaPASModel.FK_Bienes_Autos" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK_Endosos_Bienes" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK__Movimient__Id_Ca__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="MartinaPASModel.FK_Cajas_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK_Polizas_Clientes" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK_Cuotas_Endosos" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK_Recibos_Cuotas" ManuallyRouted="false" />
@@ -33,9 +31,11 @@
         <AssociationConnector Association="MartinaPASModel.FK__Rol_Privi__Id_Pr__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK__Rol_Privi__Id_Ro__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="MartinaPASModel.FK__Usuario_R__Id_Ro__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="MartinaPASModel.FK__Usuario_R__Id_Us__47DBAE45" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MartinaPASModel.Sesiones" Width="1.5" PointX="8" PointY="20.75" />
+        <EntityTypeShape EntityType="MartinaPASModel.Usuarios" Width="1.5" PointX="5.75" PointY="12.5" />
+        <AssociationConnector Association="MartinaPASModel.FK_Cajas_Usuarios" />
         <AssociationConnector Association="MartinaPASModel.FK_Sesiones_Usuarios" />
+        <AssociationConnector Association="MartinaPASModel.FK__Usuario_R__Id_Us__47DBAE45" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
