@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MartinaPAS_MVC.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -13,6 +14,7 @@ namespace MartinaPAS_MVC.Controllers
             return View();
         }
 
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

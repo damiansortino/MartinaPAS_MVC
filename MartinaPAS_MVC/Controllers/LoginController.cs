@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MartinaPAS_MVC.Controllers
 {
@@ -41,6 +42,10 @@ namespace MartinaPAS_MVC.Controllers
                     if (user.Password == hashedPassword)
                     {
                         // Autenticación exitosa, puedes redirigir a la página de inicio o a la página deseada
+
+                        FormsAuthentication.SetAuthCookie(user.Email, false);
+                        Session["Usuario"] = user;
+
                         return RedirectToAction("Index", "Home"); // Cambia "Home" por tu controlador y acción deseados
                     }
                 }
@@ -49,6 +54,14 @@ namespace MartinaPAS_MVC.Controllers
             // Si las credenciales son inválidas o no se encuentran, muestra un mensaje de error
             ViewBag.ErrorMessage = "Credenciales inválidas. Por favor, intenta nuevamente.";
             return View();
+        }
+
+        public ActionResult CerrarSesion()
+        {
+            FormsAuthentication.SignOut();
+            Session["Usuario"] = null;
+
+            return RedirectToAction("Index","Login");
         }
 
         // Método para hashear la contraseña utilizando SHA256
