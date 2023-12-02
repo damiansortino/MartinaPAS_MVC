@@ -43,8 +43,62 @@ namespace MartinaPAS_MVC.Controllers
                     {
                         // Autenticación exitosa, puedes redirigir a la página de inicio o a la página deseada
 
+                        
+                        
+                        using (MartinaPASEntities DB = new MartinaPASEntities())
+                        {
+                            var sessionsToClose = DB.Sesiones
+                            .Where(x => x.Id_Usuario == user.Id_Usuario && x.Fecha_Hora_Final == null)
+                            .ToList();
+
+                            foreach (var session in sessionsToClose)
+                            {
+                                session.Fecha_Hora_Final = DateTime.Now;
+                            }
+
+                            DB.SaveChanges();
+                            
+                        }
+                        
                         FormsAuthentication.SetAuthCookie(user.Email, false);
                         Session["Usuario"] = user;
+
+                        Sesiones sesion = new Sesiones();
+                        sesion.Fecha_Hora_Inicio = DateTime.Now;
+                        sesion.Direccion_IP = GetClientIpAddress(Request);
+                        sesion.Id_Usuario = user.Id_Usuario;
+
+                        //detecion de dispositivo
+
+                        string userAgent = Request.UserAgent;
+
+                        // Realizar análisis del User-Agent para determinar el tipo de dispositivo
+                        string deviceType = "Desconocido";
+
+                        if (userAgent != null && userAgent.ToLower().Contains("mobile"))
+                        {
+                            deviceType = "Dispositivo Móvil";
+                        }
+                        else if (userAgent != null && userAgent.ToLower().Contains("tablet"))
+                        {
+                            deviceType = "Tablet";
+                        }
+                        else if (userAgent != null && userAgent.ToLower().Contains("windows"))
+                        {
+                            deviceType = "Windows";
+                        }
+                        else if (userAgent != null && userAgent.ToLower().Contains("linux"))
+                        {
+                            deviceType = "Linux";
+                        }
+                        sesion.Tipo_Dispositivo = deviceType;
+
+                        using (MartinaPASEntities DB = new MartinaPASEntities())
+                        {
+                            DB.Sesiones.Add(sesion);
+                            DB.SaveChanges();
+                        }
+
 
                         return RedirectToAction("Index", "Home"); // Cambia "Home" por tu controlador y acción deseados
                     }
@@ -58,10 +112,30 @@ namespace MartinaPAS_MVC.Controllers
 
         public ActionResult CerrarSesion()
         {
-            FormsAuthentication.SignOut();
-            Session["Usuario"] = null;
+            try
+            {
+                using (MartinaPASEntities DB = new MartinaPASEntities())
+                {
+                    Usuarios user = (Usuarios)Session["Usuario"];
 
-            return RedirectToAction("Index","Login");
+                    Sesiones ultimaSesion = DB.Sesiones
+                    .Where(s => s.Id_Usuario == user.Id_Usuario)
+                    .OrderByDescending(s => s.Fecha_Hora_Inicio)
+                    .FirstOrDefault();
+
+                    ultimaSesion.Fecha_Hora_Final = DateTime.Now;
+                    DB.SaveChanges();
+                }
+                FormsAuthentication.SignOut();
+                Session["Usuario"] = null;
+
+                return RedirectToAction("Index", "Login");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return RedirectToAction("Index", "Login");
+            }   
         }
 
         // Método para hashear la contraseña utilizando SHA256
@@ -77,6 +151,18 @@ namespace MartinaPAS_MVC.Controllers
                 }
                 return builder.ToString();
             }
+        }
+
+        private string GetClientIpAddress(HttpRequestBase request)
+        {
+            string ipAddress = request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                ipAddress = request.UserHostAddress;
+            }
+
+            return ipAddress;
         }
 
         protected override void Dispose(bool disposing)

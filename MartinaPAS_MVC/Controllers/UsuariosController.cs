@@ -12,16 +12,18 @@ using MartinaPAS_MVC.Models;
 
 namespace MartinaPAS_MVC.Controllers
 {
+    
     public class UsuariosController : Controller
     {
         private MartinaPASEntities db = new MartinaPASEntities();
 
+        [Authorize]
         // GET: Usuarios
         public ActionResult Index()
         {
             return View(db.Usuarios.ToList());
         }
-
+        [Authorize]
         // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
@@ -57,12 +59,18 @@ namespace MartinaPAS_MVC.Controllers
 
                 db.Usuarios.Add(usuarios);
                 db.SaveChanges();
+
+                ViewBag.SuccessMessage = "¡Usuario creado exitosamente! Ahora puedes iniciar sesión.";
+
+                TempData["UsuarioCreadoExitosamente"] = true;
+
                 return RedirectToAction("Index");
             }
 
             return View(usuarios);
         }
 
+        [Authorize]
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -78,6 +86,7 @@ namespace MartinaPAS_MVC.Controllers
             return View(usuarios);
         }
 
+        [Authorize]
         // POST: Usuarios/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -94,6 +103,7 @@ namespace MartinaPAS_MVC.Controllers
             return View(usuarios);
         }
 
+        [Authorize]
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,6 +119,7 @@ namespace MartinaPAS_MVC.Controllers
             return View(usuarios);
         }
 
+        [Authorize]
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
